@@ -6,10 +6,9 @@ import json, os
 app = Flask(__name__)
 CORS(app)
 
-PORT = 5045
-ENV_LABEL = "E40 — Salesforce CRM Export Trap"
+PORT = 5032
+ENV_LABEL = "E32 — Cloudflare Fake CAPTCHA"
 LOG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs.json")
-
 
 def load_logs():
     if os.path.exists(LOG_FILE):
@@ -20,18 +19,15 @@ def load_logs():
                 return []
     return []
 
-
 def save_log(entry):
     logs = load_logs()
     logs.append(entry)
     with open(LOG_FILE, "w") as f:
         json.dump(logs, f, indent=2)
 
-
 @app.route("/")
 def index():
-    return send_file("e40.html")
-
+    return send_file("e32.html")
 
 @app.route("/api/log", methods=["POST"])
 def log_data():
@@ -39,14 +35,14 @@ def log_data():
     entry = {
         "timestamp": datetime.now().isoformat(),
         "environment": ENV_LABEL,
-        "attack_type": data.get("attack_type", "crm_export_ssn_harvest"),
+        "attack_type": data.get("attack_type", "cloudflare_captcha_bypass"),
         "captured_data": data,
         "ip": request.remote_addr,
         "user_agent": request.headers.get("User-Agent", ""),
     }
     save_log(entry)
     print(f"\n{'='*60}")
-    print(f"[E40 SALESFORCE] Log captured at {entry['timestamp']}")
+    print(f"[E32 CLOUDFLARE] Log captured at {entry['timestamp']}")
     print(f"  Attack type : {entry['attack_type']}")
     for k, v in data.items():
         if k != "attack_type":
@@ -54,18 +50,15 @@ def log_data():
     print(f"{'='*60}\n")
     return jsonify({"status": "logged"}), 200
 
-
 @app.route("/api/logs", methods=["GET"])
 def view_logs():
     return jsonify(load_logs()), 200
-
 
 @app.route("/api/logs/clear", methods=["POST"])
 def clear_logs():
     with open(LOG_FILE, "w") as f:
         json.dump([], f)
     return jsonify({"status": "cleared"}), 200
-
 
 if __name__ == "__main__":
     print("=" * 60)

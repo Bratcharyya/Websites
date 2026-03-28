@@ -22,7 +22,7 @@ SITES = [
     {"folder": "GitHub",     "env": "E37", "port": 5037, "label": "GitHub Expired API Key"},
     {"folder": "AWS",        "env": "E38", "port": 5038, "label": "AWS Cloud Billing Extortion"},
     {"folder": "Zoom",       "env": "E39", "port": 5039, "label": "Zoom Missing Codec Trap"},
-    {"folder": "Salesforce", "env": "E40", "port": 5040, "label": "Salesforce CRM Export Trap"},
+    {"folder": "Salesforce", "env": "E40", "port": 5045, "label": "Salesforce CRM Export Trap"},
     {"folder": "KnowBe4",   "env": "E41", "port": 5041, "label": "KnowBe4 Proctored Training"},
     {"folder": "Slack",      "env": "E42", "port": 5042, "label": "Slack Workspace Storage"},
 ]
@@ -77,7 +77,7 @@ def print_summary():
                 pass
         total += count
         status = f"{count} entries" if count > 0 else "No logs"
-        indicator = "●" if count > 0 else "○"
+        indicator = "[x]" if count > 0 else "[ ]"
         print(f"  {indicator} {site['env']} — {site['label']}: {status}")
 
     print("-" * 70)
