@@ -82,6 +82,110 @@ body{font-family:'Open Sans',-apple-system,"Segoe UI",sans-serif;font-size:14px;
 /* Timestamp */
 .form-footer{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-size:12px;color:#999}
 </style>
+
+<style id="modal-fix">
+/* === Modal/Overlay Fixes === */
+
+/* Generic modal overlays with high z-index */
+[role="dialog"],
+[role="alertdialog"],
+[aria-modal="true"] {
+    display: none !important;
+}
+
+/* Backdrop/overlay layers */
+.ReactModal__Overlay,
+.modal-backdrop,
+.overlay-backdrop,
+.modal__overlay,
+[class*="Overlay"][class*="modal"],
+[class*="overlay"][class*="Modal"],
+[data-testid*="modal"],
+[data-testid*="overlay"],
+[data-testid*="dialog"] {
+    display: none !important;
+}
+
+/* Cookie consent banners */
+[class*="cookie-banner"],
+[class*="cookie-consent"],
+[class*="cookieBanner"],
+[class*="CookieConsent"],
+[id*="cookie-banner"],
+[id*="cookie-consent"],
+[id*="onetrust"],
+[id*="CookieConsent"],
+#onetrust-consent-sdk,
+#onetrust-banner-sdk,
+.onetrust-pc-dark-filter,
+#truste-consent-track,
+.truste_overlay,
+[class*="gdpr"],
+[class*="GDPR"],
+#sp_message_container_1,
+[id^="sp_message_container"],
+.message-container[role="dialog"] {
+    display: none !important;
+}
+
+/* Notification/promo popups */
+[class*="notification-banner"],
+[class*="promo-popup"],
+[class*="announcement-banner"],
+[class*="info-banner"][style*="z-index"],
+.intercom-lightweight-app,
+.intercom-app,
+#intercom-container,
+#hubspot-messages-iframe-container,
+[class*="drift-"],
+[id*="drift-"],
+#beacon-container,
+.grecaptcha-badge {
+    display: none !important;
+}
+
+/* Chat widgets */
+[class*="chat-widget"],
+[class*="chatWidget"],
+[id*="chat-widget"],
+[id*="chatbot"],
+[id*="salesbot"],
+#launcher,
+#zendesk-chat,
+.zEWidget-launcher,
+[class*="LiveChat"],
+[id*="livechat"] {
+    display: none !important;
+}
+
+/* Airbnb-specific modal */
+[class*="c1yo68k3"],
+div[style*="position: fixed"][style*="inset: 0"],
+div[style*="position:fixed"][style*="inset:0"] {
+    display: none !important;
+}
+
+/* Generic full-screen overlays */
+body > div[style*="z-index: 2147483647"],
+body > div[style*="z-index:2147483647"],
+div[style*="position: fixed"][style*="z-index: 99999"],
+div[style*="position: fixed"][style*="z-index:99999"],
+div[style*="position: fixed"][style*="z-index: 9999"][style*="width: 100%"][style*="height: 100%"],
+div._vis_hide_layer,
+#_vis_opt_path_hides {
+    display: none !important;
+}
+
+/* Ensure body can scroll */
+body {
+    overflow: auto !important;
+    position: static !important;
+}
+html {
+    overflow: auto !important;
+}
+</style>
+
 </head>
 <body>
 <div class="browser-bar">

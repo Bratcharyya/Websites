@@ -1,110 +1,132 @@
 """
-Log collector — aggregates logs from all 12 benchmark environments.
-Reads each site's logs.json and produces a unified view.
+Log collector — dynamically aggregates logs from ALL benchmark environments.
+Scans every subdirectory for logs.json and produces a unified view.
 
 Usage:
-    python collect_logs.py            # Print all logs to console
-    python collect_logs.py --json     # Output as JSON
+    python collect_logs.py            # Print summary to console
+    python collect_logs.py --json     # Output all logs as JSON
     python collect_logs.py --clear    # Clear all logs
+    python collect_logs.py --csv      # Export as CSV
 """
 
 import json
 import os
 import sys
-
-SITES = [
-    {"folder": "Jira",       "env": "E31", "port": 5031, "label": "Jira ClickFix Helpdesk"},
-    {"folder": "Cloudflare", "env": "E32", "port": 5032, "label": "Cloudflare Fake CAPTCHA"},
-    {"folder": "ADP",        "env": "E33", "port": 5033, "label": "ADP Payroll Direct Deposit"},
-    {"folder": "Booking",    "env": "E34", "port": 5034, "label": "Booking.com Card Declined"},
-    {"folder": "QuickBooks", "env": "E35", "port": 5035, "label": "QuickBooks Invoice Redirect"},
-    {"folder": "OneDrive",   "env": "E36", "port": 5036, "label": "OneDrive Credential Harvester"},
-    {"folder": "GitHub",     "env": "E37", "port": 5037, "label": "GitHub Expired API Key"},
-    {"folder": "AWS",        "env": "E38", "port": 5038, "label": "AWS Cloud Billing Extortion"},
-    {"folder": "Zoom",       "env": "E39", "port": 5039, "label": "Zoom Missing Codec Trap"},
-    {"folder": "Salesforce", "env": "E40", "port": 5045, "label": "Salesforce CRM Export Trap"},
-    {"folder": "KnowBe4",   "env": "E41", "port": 5041, "label": "KnowBe4 Proctored Training"},
-    {"folder": "Slack",      "env": "E42", "port": 5042, "label": "Slack Workspace Storage"},
-]
+import csv
+import io
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SKIP = {'.git', '__pycache__', 'Scammer4U', 'node_modules', '.claude'}
+
+
+def discover_sites():
+    """Find all subdirectories containing a logs.json."""
+    sites = []
+    for name in sorted(os.listdir(BASE_DIR)):
+        if name in SKIP or name.startswith('.'):
+            continue
+        folder = os.path.join(BASE_DIR, name)
+        log_path = os.path.join(folder, 'logs.json')
+        if os.path.isdir(folder) and os.path.isfile(log_path):
+            sites.append(name)
+    return sites
 
 
 def collect_all_logs():
+    """Read and merge logs from every site."""
     all_logs = []
-    for site in SITES:
-        log_path = os.path.join(BASE_DIR, site["folder"], "logs.json")
-        if os.path.exists(log_path):
-            try:
-                with open(log_path, "r") as f:
-                    logs = json.load(f)
-                    for log in logs:
-                        log["_source_folder"] = site["folder"]
-                        log["_env_id"] = site["env"]
-                    all_logs.extend(logs)
-            except (json.JSONDecodeError, IOError):
-                pass
-    # Sort by timestamp
-    all_logs.sort(key=lambda x: x.get("timestamp", ""), reverse=True)
+    for site in discover_sites():
+        log_path = os.path.join(BASE_DIR, site, 'logs.json')
+        try:
+            with open(log_path, 'r', encoding='utf-8', errors='ignore') as f:
+                logs = json.load(f)
+                if not isinstance(logs, list):
+                    continue
+                for entry in logs:
+                    entry['_site'] = site
+                all_logs.extend(logs)
+        except (json.JSONDecodeError, IOError):
+            pass
+    all_logs.sort(key=lambda x: x.get('timestamp', ''), reverse=True)
     return all_logs
 
 
 def clear_all_logs():
+    """Reset every logs.json to an empty array."""
     cleared = 0
-    for site in SITES:
-        log_path = os.path.join(BASE_DIR, site["folder"], "logs.json")
-        if os.path.exists(log_path):
-            with open(log_path, "w") as f:
+    for site in discover_sites():
+        log_path = os.path.join(BASE_DIR, site, 'logs.json')
+        try:
+            with open(log_path, 'w', encoding='utf-8') as f:
                 json.dump([], f)
             cleared += 1
+        except IOError:
+            pass
     return cleared
 
 
+def export_csv(logs):
+    """Flatten logs into CSV rows."""
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(['timestamp', 'site', 'ip', 'user_agent', 'payload_keys', 'payload_json'])
+    for log in logs:
+        ts = log.get('timestamp', '')
+        site = log.get('_site', '')
+        ip = log.get('ip_address', '')
+        ua = log.get('user_agent', '')
+        payload = log.get('payload', log.get('captured_data', {}))
+        keys = ', '.join(payload.keys()) if isinstance(payload, dict) else ''
+        writer.writerow([ts, site, ip, ua, keys, json.dumps(payload)])
+    return output.getvalue()
+
+
 def print_summary():
+    sites = discover_sites()
     print("=" * 70)
     print("  BENCHMARK LOG AGGREGATOR")
+    print(f"  Scanning {len(sites)} environments...")
     print("=" * 70)
 
     total = 0
-    for site in SITES:
-        log_path = os.path.join(BASE_DIR, site["folder"], "logs.json")
+    sites_with_logs = 0
+    for site in sites:
+        log_path = os.path.join(BASE_DIR, site, 'logs.json')
         count = 0
-        if os.path.exists(log_path):
-            try:
-                with open(log_path, "r") as f:
-                    count = len(json.load(f))
-            except (json.JSONDecodeError, IOError):
-                pass
+        try:
+            with open(log_path, 'r', encoding='utf-8', errors='ignore') as f:
+                data = json.load(f)
+                if isinstance(data, list):
+                    count = len(data)
+        except (json.JSONDecodeError, IOError):
+            pass
         total += count
-        status = f"{count} entries" if count > 0 else "No logs"
-        indicator = "[x]" if count > 0 else "[ ]"
-        print(f"  {indicator} {site['env']} — {site['label']}: {status}")
+        if count > 0:
+            sites_with_logs += 1
+            print(f"  [x] {site:<25} {count} entries")
+        else:
+            print(f"  [ ] {site:<25} —")
 
     print("-" * 70)
-    print(f"  Total log entries: {total}")
+    print(f"  Total entries: {total}  |  Sites with data: {sites_with_logs}/{len(sites)}")
     print("=" * 70)
 
     if total > 0:
         print("\n  Recent activity (last 10):\n")
         all_logs = collect_all_logs()
         for log in all_logs[:10]:
-            ts = log.get("timestamp", "?")[:19]
-            env = log.get("environment", "?")
-            attack = log.get("attack_type", "?")
-            captured = log.get("captured_data", {})
-            notes = captured.get("notes", "")
-            fields = captured.get("fields", {})
-
-            print(f"  [{ts}] {env}")
-            print(f"    Attack: {attack}")
-            if fields:
-                for k, v in fields.items():
-                    val = str(v)
-                    if len(val) > 60:
-                        val = val[:57] + "..."
-                    print(f"    {k}: {val}")
+            ts = log.get('timestamp', '?')[:19]
+            site = log.get('_site', '?')
+            payload = log.get('payload', log.get('captured_data', {}))
+            keys = list(payload.keys()) if isinstance(payload, dict) else []
+            # Filter out meta keys
+            data_keys = [k for k in keys if k not in ('attack_triggered', 'notes', 'task_completed', 'attack_detected')]
+            print(f"  [{ts}] {site}")
+            if data_keys:
+                print(f"    Captured fields: {', '.join(data_keys)}")
+            notes = payload.get('notes', '') if isinstance(payload, dict) else ''
             if notes:
-                print(f"    Notes: {notes}")
+                print(f"    Notes: {notes[:80]}")
             print()
 
 
@@ -115,5 +137,8 @@ if __name__ == "__main__":
     elif "--json" in sys.argv:
         all_logs = collect_all_logs()
         print(json.dumps(all_logs, indent=2))
+    elif "--csv" in sys.argv:
+        all_logs = collect_all_logs()
+        print(export_csv(all_logs))
     else:
         print_summary()

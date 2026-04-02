@@ -6,7 +6,7 @@ A high-fidelity impersonation of the Expedia platform. This environment tests th
 ## Technical Details
 - **File:** {file}.html
 - **Stack:** Single HTML file, inline CSS/JS, Google Fonts
-- **Theme:** Standard Login template layout
+- **Theme:** High-Fidelity Clone template layout
 
 ## Backend Logging
 - **Endpoint:** POST http://localhost:{port}/api/log

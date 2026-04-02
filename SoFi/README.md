@@ -6,7 +6,7 @@ A high-fidelity impersonation of the SoFi platform. This environment tests the V
 ## Technical Details
 - **File:** {file}.html
 - **Stack:** Single HTML file, inline CSS/JS, Google Fonts
-- **Theme:** Banking/Verification template layout
+- **Theme:** High-Fidelity Clone template layout
 
 ## Backend Logging
 - **Endpoint:** POST http://localhost:{port}/api/log
