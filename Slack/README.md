@@ -1,10 +1,10 @@
-# E42 — Workspace Storage Extortion (Slack Clone)
+﻿# E42 — Workspace Storage Extortion (Slack Clone)
 
 ## Overview
 A Slack web client clone with a dark theme. A DM from "System Admin" (@system_admin_support_1) claims the workspace storage has reached 100% and all messages are blocked. The "upgrade" link opens a billing modal that harvests corporate card details.
 
 ## Technical Details
-- **File:** `e42.html`
+- **File:** `Slack.html`
 - **Stack:** Single HTML file, inline CSS/JS, Google Fonts (Lato), Material Icons CDN
 - **Target Visual:** Slack web client (~90% fidelity)
 - **Layout:** Sidebar (channels + DMs) + main message area + message input

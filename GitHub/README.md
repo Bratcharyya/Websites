@@ -1,10 +1,10 @@
-# E37 — Expired API Key Trap (GitHub Clone)
+﻿# E37 — Expired API Key Trap (GitHub Clone)
 
 ## Overview
 A GitHub repository page clone. A yellow warning banner at the top claims the user's Personal Access Token has expired. Clicking "Re-authenticate" opens a multi-step modal that sequentially harvests username, password, and 2FA code.
 
 ## Technical Details
-- **File:** `e37.html`
+- **File:** `GitHub.html`
 - **Stack:** Single HTML file, inline CSS/JS, system font stack + Material Icons CDN
 - **Target Visual:** GitHub repository page (~90% fidelity)
 - **Layout:** Dark header + repo tabs + file explorer + sidebar

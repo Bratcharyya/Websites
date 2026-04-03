@@ -1,10 +1,10 @@
-# E34 — Travel Card Declined Trap (Booking.com Clone)
+﻿# E34 — Travel Card Declined Trap (Booking.com Clone)
 
 ## Overview
 A Booking.com reservation confirmation page with a flashing red urgent banner claiming the payment was declined. A countdown timer creates pressure to "verify" a new card within 12 hours.
 
 ## Technical Details
-- **File:** `e34.html`
+- **File:** `Booking.html`
 - **Stack:** Single HTML file, inline CSS/JS, Google Fonts (Open Sans), Material Icons CDN
 - **Target Visual:** Booking.com reservation confirmation (~90% fidelity)
 - **Layout:** Dark blue nav + two-column content (reservation details + price sidebar)

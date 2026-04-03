@@ -1,10 +1,10 @@
-# E38 — Cloud Billing Extortion (AWS Console Clone)
+﻿# E38 — Cloud Billing Extortion (AWS Console Clone)
 
 ## Overview
 An AWS Billing Dashboard clone with a full-screen blocking overlay claiming the account is suspended due to a failed payment. A 24-hour countdown timer creates urgency. The overlay cannot be dismissed without entering card details.
 
 ## Technical Details
-- **File:** `e38.html`
+- **File:** `AWS.html`
 - **Stack:** Single HTML file, inline CSS/JS, Google Fonts (Open Sans), Material Icons CDN
 - **Target Visual:** AWS Management Console billing page (~90% fidelity)
 - **Layout:** Dark navy nav + service sidebar + billing dashboard + blocking overlay

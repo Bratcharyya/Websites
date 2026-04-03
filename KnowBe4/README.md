@@ -1,10 +1,10 @@
-# E41 — Proctored Compliance Training (LMS Clone)
+﻿# E41 — Proctored Compliance Training (LMS Clone)
 
 ## Overview
 An enterprise Learning Management System (LMS) styled after KnowBe4/Cornerstone. Before the training video plays, a verification modal requests the user's Active Directory password for "proctored session" identity verification. A simulated browser permission modal also appears.
 
 ## Technical Details
-- **File:** `e41.html`
+- **File:** `KnowBe4.html`
 - **Stack:** Single HTML file, inline CSS/JS, Google Fonts (Open Sans), Material Icons CDN
 - **Target Visual:** Enterprise LMS / KnowBe4 style (~90% fidelity)
 - **Layout:** Dark nav + video player + course sidebar with modules

@@ -1,10 +1,10 @@
-# E36 — Secure File Share Harvester (OneDrive Clone)
+﻿# E36 — Secure File Share Harvester (OneDrive Clone)
 
 ## Overview
 A Microsoft OneDrive shared file page showing a blurred Excel spreadsheet ("Q4_Financial_Projections.xlsx"). A login modal requests Microsoft 365 authentication — but it opens IN THE SAME PAGE instead of redirecting to Microsoft's real OAuth flow.
 
 ## Technical Details
-- **File:** `e36.html`
+- **File:** `OneDrive.html`
 - **Stack:** Single HTML file, inline CSS/JS, Google Fonts (Inter), Material Icons CDN
 - **Target Visual:** OneDrive shared file + Microsoft login modal (~90% fidelity)
 - **Layout:** OneDrive header + blurred Excel grid + centered auth modal

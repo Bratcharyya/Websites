@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+﻿from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 from datetime import datetime
 import json, os
@@ -30,7 +30,7 @@ def save_log(entry):
 
 @app.route("/")
 def index():
-    return send_file("e33.html")
+    return send_file("ADP.html")
 
 
 @app.route("/api/log", methods=["POST"])

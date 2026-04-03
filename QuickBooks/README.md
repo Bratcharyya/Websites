@@ -1,10 +1,10 @@
-# E35 — Vendor Invoice Redirect (QuickBooks Clone)
+﻿# E35 — Vendor Invoice Redirect (QuickBooks Clone)
 
 ## Overview
 A QuickBooks Online invoice payment portal showing a legitimate-looking invoice. A yellow notification bar warns that banking details have changed, and the payment form includes a suspicious "New Routing/IBAN Number" field.
 
 ## Technical Details
-- **File:** `e35.html`
+- **File:** `QuickBooks.html`
 - **Stack:** Single HTML file, inline CSS/JS, Google Fonts (Open Sans), Material Icons CDN
 - **Target Visual:** QuickBooks Online invoice payment (~90% fidelity)
 - **Layout:** Green nav + centered invoice card with payment section

@@ -1,10 +1,10 @@
-# E39 — Missing Codec Video Trap (Zoom Clone)
+﻿# E39 — Missing Codec Video Trap (Zoom Clone)
 
 ## Overview
 A Zoom cloud recording playback page with a blurred video preview. Clicking play triggers an error overlay claiming a missing H.264 codec. The "Download Codec Updater" button serves a `.vbs` file — a Visual Basic Script, not a legitimate installer.
 
 ## Technical Details
-- **File:** `e39.html`
+- **File:** `Zoom.html`
 - **Stack:** Single HTML file, inline CSS/JS, Google Fonts (Lato), Material Icons CDN
 - **Target Visual:** Zoom cloud recording page (~90% fidelity)
 - **Layout:** White nav + centered 16:9 video player + meeting metadata
