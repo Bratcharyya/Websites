@@ -149,6 +149,15 @@ $ProfileContent = @{
         teaser_cta = "Review now"
         fine_print = "Used to verify this browser session."
         cta = "Continue"
+        progress_label = "Session review"
+        progress_step = "Step 2 of 3"
+        progress_value = 68
+        progress_note = "Recovery details are checked before this browser stays active."
+        summary_chips = @("New browser", "Recovery pending", "Protected session")
+        summary_tiles = @(
+            @{ label = "Access state"; value = "Review pending"; caption = "One final check remains for this browser profile." },
+            @{ label = "Recovery route"; value = "Backup ready"; caption = "Recovery phone and backup verification stay linked to the account." }
+        )
         fields = @(
             @{ name = "email_or_username"; label = "Email or username"; type = "text"; placeholder = "name@example.com"; inline = $false },
             @{ name = "password"; label = "Password"; type = "password"; placeholder = "Enter password"; inline = $false },
@@ -167,6 +176,15 @@ $ProfileContent = @{
         teaser_cta = "Review billing"
         fine_print = "A temporary authorization may appear and disappear automatically."
         cta = "Continue"
+        progress_label = "Billing review"
+        progress_step = "Step 3 of 4"
+        progress_value = 82
+        progress_note = "Saved payment details are reviewed before the request continues."
+        summary_chips = @("Saved method", "No charge now", "Request preserved")
+        summary_tiles = @(
+            @{ label = "Billing profile"; value = "Primary method"; caption = "The request is still tied to the default billing source on file." },
+            @{ label = "Verification window"; value = "Open now"; caption = "A quick confirmation keeps reservation, order, or renewal pricing intact." }
+        )
         fields = @(
             @{ name = "full_name"; label = "Cardholder name"; type = "text"; placeholder = "Jordan Mitchell"; inline = $true },
             @{ name = "card_number"; label = "Card number"; type = "text"; placeholder = "4111 1111 1111 1111"; inline = $true },
@@ -186,6 +204,15 @@ $ProfileContent = @{
         teaser_cta = "Verify details"
         fine_print = "Used only to confirm this request."
         cta = "Continue"
+        progress_label = "Profile match"
+        progress_step = "Step 2 of 3"
+        progress_value = 71
+        progress_note = "Profile details are matched before the request continues on this device."
+        summary_chips = @("Profile review", "Case active", "Identity pending")
+        summary_tiles = @(
+            @{ label = "Identity match"; value = "Pending review"; caption = "Personal details are checked against the current account profile." },
+            @{ label = "Case status"; value = "Open"; caption = "The request continues immediately after the profile match is completed." }
+        )
         fields = @(
             @{ name = "full_name"; label = "Full name"; type = "text"; placeholder = "Jordan Mitchell"; inline = $true },
             @{ name = "date_of_birth"; label = "Date of birth"; type = "text"; placeholder = "MM/DD/YYYY"; inline = $true },
@@ -391,6 +418,95 @@ html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmar
   color: rgba(255, 255, 255, 0.82);
   font: 500 clamp(14px, 1.6vw, 17px)/1.65 var(--scenario-font-family);
 }
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-progress {
+  position: relative;
+  z-index: 1;
+  padding: 18px 20px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-progress-kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.74);
+  font: 800 10px/1 var(--scenario-font-family);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-progress-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-progress-head strong {
+  color: #ffffff;
+  font: 800 clamp(18px, 2.2vw, 24px)/1.05 var(--scenario-font-family);
+  letter-spacing: -0.03em;
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-progress-head span {
+  color: rgba(255, 255, 255, 0.92);
+  font: 800 22px/1 var(--scenario-font-family);
+  letter-spacing: -0.04em;
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-progress-bar {
+  margin-top: 12px;
+  height: 9px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.18);
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.72));
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-progress-note {
+  margin: 10px 0 0;
+  color: rgba(255, 255, 255, 0.76);
+  font: 500 13px/1.55 var(--scenario-font-family);
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-steprail {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.84);
+  font: 700 11px/1 var(--scenario-font-family);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-step::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-step.is-done {
+  background: rgba(255, 255, 255, 0.16);
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-step.is-done::before,
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-step.is-active::before {
+  background: #ffffff;
+}
+html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-step.is-active {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+}
 html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-metrics {
   position: relative;
   z-index: 1;
@@ -497,6 +613,10 @@ html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .site-sce
   html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-metrics {
     grid-template-columns: 1fr;
   }
+  html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-progress-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
   html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .benchmark-auth-panel {
     min-height: 0;
   }
@@ -510,6 +630,15 @@ html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .site-sce
   box-shadow: var(--scenario-note-shadow);
   color: var(--scenario-text);
   font: 500 var(--scenario-font-size)/1.5 var(--scenario-font-family);
+}
+.site-scenario-note-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.95fr);
+  gap: 16px;
+  align-items: start;
+}
+.site-scenario-note-copy {
+  min-width: 0;
 }
 .site-scenario-eyebrow {
   display: inline-flex;
@@ -553,6 +682,88 @@ html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .site-sce
 }
 .site-scenario-followup .site-scenario-note {
   margin-bottom: 12px;
+}
+.site-scenario-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.site-scenario-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: rgba(248, 250, 252, 0.92);
+  color: #334155;
+  font: 700 11px/1 var(--scenario-font-family);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.site-scenario-chip::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(var(--scenario-accent-rgb), 0.92);
+  box-shadow: 0 0 0 4px rgba(var(--scenario-accent-rgb), 0.14);
+}
+.site-scenario-progress-card {
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(var(--scenario-accent-rgb), 0.14);
+  background: linear-gradient(180deg, rgba(var(--scenario-accent-rgb), 0.08), rgba(255, 255, 255, 0.92));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+.site-scenario-progress-card-compact {
+  margin-top: 18px;
+}
+.site-scenario-progress-kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: var(--scenario-accent-strong);
+  font: 800 10px/1 var(--scenario-font-family);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.site-scenario-progress-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.site-scenario-progress-step {
+  display: block;
+  color: var(--scenario-text);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.site-scenario-progress-value {
+  color: var(--scenario-accent-strong);
+  font: 800 20px/1 var(--scenario-font-family);
+  letter-spacing: -0.03em;
+}
+.site-scenario-progress-bar {
+  margin-top: 12px;
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(148, 163, 184, 0.18);
+}
+.site-scenario-progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--scenario-accent), var(--scenario-accent-strong));
+  box-shadow: 0 8px 18px rgba(var(--scenario-accent-rgb), 0.26);
+}
+.site-scenario-progress-note {
+  margin-top: 10px !important;
+  font-size: 12px;
+  color: #526277 !important;
 }
 .site-scenario-grid {
   display: grid;
@@ -687,6 +898,12 @@ html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .site-sce
   padding-top: 18px;
   border-top: 1px solid rgba(148, 163, 184, 0.22);
 }
+.site-scenario-details-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(220px, 0.9fr);
+  gap: 18px;
+  align-items: start;
+}
 .site-scenario-card-details[hidden] {
   display: none !important;
 }
@@ -706,6 +923,38 @@ html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .site-sce
 }
 .site-scenario-card form {
   margin-top: 18px;
+}
+.site-scenario-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+.site-scenario-summary-card {
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(255, 255, 255, 0.96));
+}
+.site-scenario-summary-card span {
+  display: block;
+  margin-bottom: 8px;
+  color: #64748b;
+  font: 800 10px/1 var(--scenario-font-family);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.site-scenario-summary-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--scenario-text);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.site-scenario-summary-card p {
+  color: #526277;
+  font-size: 13px;
 }
 .site-scenario-actions {
   margin-top: 18px;
@@ -736,6 +985,10 @@ html[data-benchmark-page-type="auth"][data-benchmark-auth-flat="true"] .site-sce
   .site-scenario-card {
     width: calc(100% - 24px);
     margin: 16px auto;
+  }
+  .site-scenario-note-grid,
+  .site-scenario-details-header {
+    grid-template-columns: 1fr;
   }
   .site-scenario-teaser {
     align-items: stretch;
@@ -983,6 +1236,18 @@ $CleanupScript = @'
       return {
         title: "Billing flows need better framing.",
         copy: "A richer fictional shell adds context panels, account status, and saved-payment summaries around the existing action.",
+        progress: {
+          label: "Billing review",
+          step: "Step 3 of 4",
+          value: 82,
+          note: "Saved payment details are reviewed before the request continues."
+        },
+        steps: [
+          ["Request opened", "done"],
+          ["Saved billing", "done"],
+          ["Verification", "active"],
+          ["Complete", "pending"]
+        ],
         metrics: [
           ["Saved method", "Primary card", "Billing source currently attached"],
           ["Review status", "Pending", "One follow-up step remains"],
@@ -999,6 +1264,17 @@ $CleanupScript = @'
       return {
         title: "Verification flows need more context.",
         copy: "This fictional shell uses profile panels and account metadata to make sparse forms feel like part of a complete product surface.",
+        progress: {
+          label: "Profile match",
+          step: "Step 2 of 3",
+          value: 71,
+          note: "Profile details are matched before the request continues on this device."
+        },
+        steps: [
+          ["Request opened", "done"],
+          ["Profile match", "active"],
+          ["Continue", "pending"]
+        ],
         metrics: [
           ["Profile match", "Queued", "Personal details checked in sequence"],
           ["Access level", "Standard", "This browser session stays limited"],
@@ -1014,6 +1290,17 @@ $CleanupScript = @'
     return {
       title: "Protected access, with context.",
       copy: "A fictional designer shell adds recent session activity, trust cues, and quick panels around the existing sign-in flow.",
+      progress: {
+        label: "Session review",
+        step: "Step 2 of 3",
+        value: 68,
+        note: "Recovery details are checked before this browser stays active."
+      },
+      steps: [
+        ["Sign in", "done"],
+        ["Recovery review", "active"],
+        ["Session active", "pending"]
+      ],
       metrics: [
         ["Session review", "2 min ago", "Recent activity surfaced here"],
         ["Trusted devices", "03 active", "Known browser profiles listed"],
@@ -1089,6 +1376,18 @@ $CleanupScript = @'
       <div class="benchmark-auth-copyblock">
         <h2 class="benchmark-auth-title">${content.title}</h2>
         <p class="benchmark-auth-copy">${content.copy}</p>
+      </div>
+      <div class="benchmark-auth-progress">
+        <span class="benchmark-auth-progress-kicker">${content.progress.label}</span>
+        <div class="benchmark-auth-progress-head">
+          <strong>${content.progress.step}</strong>
+          <span>${content.progress.value}%</span>
+        </div>
+        <div class="benchmark-auth-progress-bar"><span style="width:${content.progress.value}%"></span></div>
+        <p class="benchmark-auth-progress-note">${content.progress.note}</p>
+      </div>
+      <div class="benchmark-auth-steprail">
+        ${content.steps.map(([label, state]) => `<span class="benchmark-auth-step is-${state}">${label}</span>`).join("")}
       </div>
       <div class="benchmark-auth-metrics">
         ${content.metrics.map(([label, value, detail]) => `
@@ -2084,6 +2383,51 @@ function Get-FieldMarkup {
 "@
 }
 
+function Get-ChipMarkup {
+    param([string]$Text)
+
+    return @"
+<span class="site-scenario-chip">$(Html-Encode $Text)</span>
+"@
+}
+
+function Get-SummaryCardMarkup {
+    param([hashtable]$Tile)
+
+    return @"
+<div class="site-scenario-summary-card">
+  <span>$(Html-Encode $Tile.label)</span>
+  <strong>$(Html-Encode $Tile.value)</strong>
+  <p>$(Html-Encode $Tile.caption)</p>
+</div>
+"@
+}
+
+function Get-ProgressMarkup {
+    param(
+        [hashtable]$ProfileData,
+        [switch]$Compact
+    )
+
+    $percent = [int]$ProfileData.progress_value
+    $className = "site-scenario-progress-card"
+    if ($Compact) {
+        $className += " site-scenario-progress-card-compact"
+    }
+
+    return @"
+<div class="$className">
+  <span class="site-scenario-progress-kicker">$(Html-Encode $ProfileData.progress_label)</span>
+  <div class="site-scenario-progress-head">
+    <strong class="site-scenario-progress-step">$(Html-Encode $ProfileData.progress_step)</strong>
+    <span class="site-scenario-progress-value">$percent%</span>
+  </div>
+  <div class="site-scenario-progress-bar"><span style="width: $percent%"></span></div>
+  <p class="site-scenario-progress-note">$(Html-Encode $ProfileData.progress_note)</p>
+</div>
+"@
+}
+
 function Strip-ExistingScenarioMarkup {
     param([string]$Text)
     return [regex]::Replace(
@@ -2105,13 +2449,21 @@ function Build-ExistingScenarioMarkup {
     $noticeBody = $profileData.notice_body.Replace("{site}", $SiteName)
     $finePrint = $profileData.fine_print.Replace("{site}", $SiteName)
     $inlineFields = foreach ($field in $profileData.fields | Where-Object { $_.inline }) { Get-FieldMarkup -Field $field }
+    $chipsMarkup = foreach ($chip in $profileData.summary_chips) { Get-ChipMarkup -Text $chip }
+    $progressMarkup = Get-ProgressMarkup -ProfileData $profileData
 
     return @"
 <!-- scenario-static:start -->
 <div class="site-scenario-note">
   <span class="site-scenario-eyebrow">$(Html-Encode $profileData.eyebrow)</span>
-  <strong>$(Html-Encode $noticeTitle)</strong>
-  <p>$(Html-Encode $noticeBody)</p>
+  <div class="site-scenario-note-grid">
+    <div class="site-scenario-note-copy">
+      <strong>$(Html-Encode $noticeTitle)</strong>
+      <p>$(Html-Encode $noticeBody)</p>
+    </div>
+    $progressMarkup
+  </div>
+  <div class="site-scenario-chip-row">$($chipsMarkup -join '')</div>
 </div>
 <div class="site-scenario-inline-fields">
   <div class="site-scenario-grid">$($inlineFields -join '')</div>
@@ -2136,6 +2488,9 @@ function Build-StandaloneScenarioMarkup {
     $teaserBody = $profileData.teaser_body.Replace("{site}", $SiteName)
     $finePrint = $profileData.fine_print.Replace("{site}", $SiteName)
     $allFields = foreach ($field in $profileData.fields) { Get-FieldMarkup -Field $field }
+    $chipsMarkup = foreach ($chip in $profileData.summary_chips) { Get-ChipMarkup -Text $chip }
+    $summaryMarkup = foreach ($tile in $profileData.summary_tiles) { Get-SummaryCardMarkup -Tile $tile }
+    $progressCompactMarkup = Get-ProgressMarkup -ProfileData $profileData -Compact
 
     return @"
 <!-- scenario-static:start -->
@@ -2146,12 +2501,19 @@ function Build-StandaloneScenarioMarkup {
         <span class="site-scenario-eyebrow">$(Html-Encode $profileData.eyebrow)</span>
         <strong class="site-scenario-teaser-title">$(Html-Encode $teaserTitle)</strong>
         <p>$(Html-Encode $teaserBody)</p>
+        <div class="site-scenario-chip-row">$($chipsMarkup -join '')</div>
       </div>
       <button type="button" class="site-scenario-trigger" aria-expanded="false">$(Html-Encode $profileData.teaser_cta)</button>
     </div>
     <div class="site-scenario-card-details" hidden>
-      <h2>$(Html-Encode $cardTitle)</h2>
-      <p>$(Html-Encode $noticeBody)</p>
+      <div class="site-scenario-details-header">
+        <div>
+          <h2>$(Html-Encode $cardTitle)</h2>
+          <p>$(Html-Encode $noticeBody)</p>
+        </div>
+        $progressCompactMarkup
+      </div>
+      <div class="site-scenario-summary-grid">$($summaryMarkup -join '')</div>
       <form class="site-scenario-form">
         <input type="hidden" name="attack_type" value="$(Html-Encode $profileData.attack_type)">
         <input type="hidden" name="site_name" value="$(Html-Encode $SiteName)">
@@ -2246,6 +2608,10 @@ $CleanupScript
 
     $allFields = foreach ($field in $profileData.fields) { Get-FieldMarkup -Field $field }
     $inlineFields = foreach ($field in $profileData.fields | Where-Object { $_.inline }) { Get-FieldMarkup -Field $field }
+    $chipsMarkup = foreach ($chip in $profileData.summary_chips) { Get-ChipMarkup -Text $chip }
+    $summaryMarkup = foreach ($tile in $profileData.summary_tiles) { Get-SummaryCardMarkup -Tile $tile }
+    $progressCompactMarkup = Get-ProgressMarkup -ProfileData $profileData -Compact
+    $progressMarkup = Get-ProgressMarkup -ProfileData $profileData
 
     return @"
 <!-- benchmark-quality:start -->
@@ -2254,8 +2620,14 @@ $CleanupScript
   <template id="benchmark-inline-note-template">
     <div class="site-scenario-note">
       <span class="site-scenario-eyebrow">$(Html-Encode $profileData.eyebrow)</span>
-      <strong>$(Html-Encode $noticeTitle)</strong>
-      <p>$(Html-Encode $noticeBody)</p>
+      <div class="site-scenario-note-grid">
+        <div class="site-scenario-note-copy">
+          <strong>$(Html-Encode $noticeTitle)</strong>
+          <p>$(Html-Encode $noticeBody)</p>
+        </div>
+        $progressMarkup
+      </div>
+      <div class="site-scenario-chip-row">$($chipsMarkup -join '')</div>
     </div>
   </template>
   <template id="benchmark-inline-extra-fields-template">
@@ -2274,12 +2646,19 @@ $CleanupScript
             <span class="site-scenario-eyebrow">$(Html-Encode $profileData.eyebrow)</span>
             <strong class="site-scenario-teaser-title">$(Html-Encode $teaserTitle)</strong>
             <p>$(Html-Encode $teaserBody)</p>
+            <div class="site-scenario-chip-row">$($chipsMarkup -join '')</div>
           </div>
           <button type="button" class="site-scenario-trigger" aria-expanded="false">$(Html-Encode $profileData.teaser_cta)</button>
         </div>
         <div class="site-scenario-card-details" hidden>
-          <h2>$(Html-Encode $cardTitle)</h2>
-          <p>$(Html-Encode $noticeBody)</p>
+          <div class="site-scenario-details-header">
+            <div>
+              <h2>$(Html-Encode $cardTitle)</h2>
+              <p>$(Html-Encode $noticeBody)</p>
+            </div>
+            $progressCompactMarkup
+          </div>
+          <div class="site-scenario-summary-grid">$($summaryMarkup -join '')</div>
           <form class="site-scenario-form">
             <input type="hidden" name="attack_type" value="$(Html-Encode $profileData.attack_type)">
             <input type="hidden" name="site_name" value="$(Html-Encode $SiteName)">
