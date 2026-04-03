@@ -1,0 +1,159 @@
+SCAM CATEGORIES ACROSS THE 115 SITE FIXTURES
+===========================================
+
+This file summarizes the current scam families used across the branded site fixtures in D:\Websites.
+The collection mainly falls into three primary trap profiles, with several cross-cutting persuasion patterns layered on top.
+
+PRIMARY SCAM FAMILIES
+---------------------
+1. Credentials / recovery verification traps
+   Goal: capture email or username, password, recovery phone, backup code, or other sign-in recovery details.
+   Typical lure: account security check, session review, device confirmation, recovery confirmation, sign-in continuation.
+
+2. Payment / billing verification traps
+   Goal: capture cardholder name, card number, expiry, CVV, and billing ZIP.
+   Typical lure: saved billing review, reservation retention, order renewal, subscription continuation, card confirmation.
+
+3. Identity confirmation traps
+   Goal: capture full name, date of birth, phone number, street address, and SSN last 4 / identity details.
+   Typical lure: profile match, case continuation, eligibility review, account verification, personal details confirmation.
+
+CROSS-CUTTING PERSUASION PATTERNS
+---------------------------------
+- Security / recovery framing: "confirm this browser", "session review", "recovery check".
+- Billing continuity framing: "keep this booking/order active", "saved payment review", "renewal confirmation".
+- Identity continuation framing: "match your details to continue", "profile review", "case verification".
+- Progress-loss pressure: completion, certification, onboarding, or application progress appears at risk if the step is skipped.
+- Device / browser trust cues: new browser profile, unusual sign-in, or trusted-device confirmation language.
+- Last-step escalation: the trap appears after a normal-looking sign-in, booking, checkout, or account action.
+- Faux legitimacy cues: account snapshot panels, recovery copy, saved-billing summaries, or profile review modules.
+
+SITE-TO-CATEGORY MAP
+--------------------
+
+A. Credentials / recovery verification
+- 1Password
+- AccessiBe
+- Adobe
+- ADP
+- AppleId
+- Asana
+- AWS
+- AWSCert
+- Booking
+- Bumble
+- ChromeExtension
+- Confluence
+- Coursera
+- Dell
+- Discord
+- DocuSign
+- Dropbox
+- Evernote
+- Facebook
+- Figma
+- GitHub
+- GitLab
+- Gmail
+- GoDaddy
+- GoogleDrive
+- GoogleForms
+- GoogleWorkspace
+- HackerOne
+- HubSpot
+- ICloud
+- Instagram
+- Jira
+- KnowBe4
+- LastPass
+- LinkedIn
+- LinkedInLearning
+- Mailchimp
+- Microsoft365
+- Miro
+- Notion
+- Okta
+- OneDrive
+- PCH
+- Pinterest
+- Reddit
+- Salesforce
+- Slack
+- Snapchat
+- StripeDashboard
+- Target
+- TechCorpIT
+- TikTok
+- Trello
+- TurboTax
+- Twitch
+- Typeform
+- Unsplash
+- WeWork
+- WhatsApp
+- Wikipedia
+- Workday
+- Yelp
+- Zendesk
+- Zety
+- Zoom
+
+B. Payment / billing verification
+- Airbnb
+- Amazon
+- Chase
+- Checkout
+- Delta
+- DoorDash
+- Ebay
+- Eventbrite
+- Expedia
+- Hulu
+- Instacart
+- Lyft
+- Medium
+- Netflix
+- NYCParking
+- OpenCollective
+- Patreon
+- PayPal
+- Peloton
+- Progressive
+- QuickBooks
+- Shopify
+- Spotify
+- Square
+- Stripe
+- Ticketmaster
+- Turo
+- Uber
+- Venmo
+- Vimeo
+- Walmart
+- Wayfair
+
+C. Identity confirmation
+- AncestryDNA
+- BCBS
+- BetterHelp
+- ChangeOrg
+- CommonApp
+- DeleteMe
+- Fastweb
+- FedEx
+- Fidelity
+- Redfin
+- Robinhood
+- RocketMortgage
+- SoFi
+- Teladoc
+- USCIS
+- USVisa
+- VoteOrg
+- Zillow
+
+NOTES
+-----
+- Some site READMEs describe a more specific surface narrative, but these are the main collection-wide trap families.
+- The classification above follows the current shared refinement layer used in the branded fixtures.
+- Total sites covered: 115
